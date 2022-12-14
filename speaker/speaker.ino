@@ -14,6 +14,13 @@
 // define the speaker pin
 #define SPEAKER_PIN 14
 
+// define some notes
+#define NUM_NOTES 8
+const int notes[] = {
+  // C Major scale, starting from C4
+  262, 294, 330, 349, 392, 440, 494, 523
+};
+
 void setup() {
   // set up timer and attach it to the speaker pin
   ledcSetup(PWM_CHANNEL, PWM_FREQUENCY, PWM_PRECISION);
@@ -21,6 +28,9 @@ void setup() {
 }
 
 void loop() {
-  // play a note using PWM
-  ledcWrite(PWM_CHANNEL, 2000);
+  // go up the C major scale
+  for(int i = 0; i < NUM_NOTES; i++){
+    ledcWriteTone(PWM_CHANNEL, notes[i]);
+    delay(500);
+  }
 }
