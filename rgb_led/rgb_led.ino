@@ -20,8 +20,8 @@
 
 // define PWM channels; one for each color
 #define PWM_RED_CHANNEL 0
-#define PWM_GREEN_CHANNEL 1
-#define PWM_BLUE_CHANNEL 2
+#define PWM_GREEN_CHANNEL 2
+#define PWM_BLUE_CHANNEL 4
 
 // define PWM characteristics
 // PWM_RES is 8 bits, meaning we have values 0-255
