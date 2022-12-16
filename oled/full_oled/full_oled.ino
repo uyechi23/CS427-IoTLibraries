@@ -1,10 +1,10 @@
 /**
- * monochrome_oled
+ * full_oled
  * 
  * This was written for the CS427 class at the University of Portland - Internet of Things.
  * The details of this product can be found below. This example library is based on the
  * ssd1306_128x32_i2c.ino file in the Adafruit SSD1306 examples. It has been reconfigured
- * for the ESP32 using the Wire library to enable the I2C communication protocol. Ensure
+ * for the ESP32 using the Wire library to enable the I2C communication protocol.
  *
  * 
  * Required Libraries:
