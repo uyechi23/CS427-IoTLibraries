@@ -33,6 +33,10 @@ C:\Users\<username>\Documents\Arduino> git clone https://github.com/uyechi23/CS4
 
 Once the files are cloned, you can open the Arduino IDE and go to File > Open... and navigate to the cloned directory.
 
+## **Supplementary Documents**
+Additional files can be viewed in the _schematics and _breadboards folder. These folders include the schematic drawings for each example project, as well as
+how the breadboard will look like with the completed circuit. Please use these images as a reference when constructing the circuits.
+
 ## **Library Descriptions**
 
 ### **basic_led**
