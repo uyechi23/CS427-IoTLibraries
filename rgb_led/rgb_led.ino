@@ -52,7 +52,7 @@ void loop() {
   int blue = map(analogRead(BLUE_POT), 0, 4095, 0, 255);
 
   // write the RGB values to the LED
-  // note that the LED does not fully turn off due to limits of PWM
+  // note that the LED does not fully turn off due to hardware limitation
   ledcWrite(PWM_RED_CHANNEL, red);
   ledcWrite(PWM_GREEN_CHANNEL, green);
   ledcWrite(PWM_BLUE_CHANNEL, blue);
