@@ -20,12 +20,12 @@
 
 // define PWM channels; one for each color
 #define PWM_RED_CHANNEL 0
-#define PWM_GREEN_CHANNEL 2
-#define PWM_BLUE_CHANNEL 4
+#define PWM_GREEN_CHANNEL 1
+#define PWM_BLUE_CHANNEL 2
 
 // define PWM characteristics
 // PWM_RES is 8 bits, meaning we have values 0-255
-#define PWM_FREQ 30000
+#define PWM_FREQ 1000
 #define PWM_RES 8
 
 void setup() {
@@ -52,6 +52,7 @@ void loop() {
   int blue = map(analogRead(BLUE_POT), 0, 4095, 0, 255);
 
   // write the RGB values to the LED
+  // note that the LED does not fully turn off due to limits of PWM
   ledcWrite(PWM_RED_CHANNEL, red);
   ledcWrite(PWM_GREEN_CHANNEL, green);
   ledcWrite(PWM_BLUE_CHANNEL, blue);
