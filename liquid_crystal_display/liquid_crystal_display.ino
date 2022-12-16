@@ -1,5 +1,5 @@
 /**
- * led_bar
+ * liquid_crystal_display
  * 
  * This was written for the CS427 class at the University of Portland - Internet of Things.
  * The LCD (liquid crystal display) included in the ESP32 kit uses an I2C interface.
