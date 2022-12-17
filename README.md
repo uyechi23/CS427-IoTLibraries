@@ -66,7 +66,7 @@ A library for the I2C LCD included in the ESP32 kit. In this example, a button i
 
 ### **oled**
 A black-and-white OLED display manufactured by Adafruit. The libraries within this folder contain modules that separate the functions of the OLED display,
-such as using lines, shapes, text, and more.
+such as using lines, shapes, text, and more. <WIP>
 
 ### **potentiometer**
 Shows the potentiometer's reading as a 12-bit value and voltage value (based on +3.3V).
