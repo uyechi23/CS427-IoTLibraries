@@ -64,9 +64,9 @@ A 10-segment LED bar with a moving animation.
 ### **liquid_crystal_display**
 A library for the I2C LCD included in the ESP32 kit. In this example, a button is used to increment a counter, which is displayed on the screen.
 
-### **monochrome_oled**
-A black-and-white OLED display manufactured by Adafruit. This example code is a modified version of one of their examples, which allows the
-ESP32 to integrate with the library. (WIP - separating into example modules to display different things).
+### **oled**
+A black-and-white OLED display manufactured by Adafruit. The libraries within this folder contain modules that separate the functions of the OLED display,
+such as using lines, shapes, text, and more.
 
 ### **potentiometer**
 Shows the potentiometer's reading as a 12-bit value and voltage value (based on +3.3V).
