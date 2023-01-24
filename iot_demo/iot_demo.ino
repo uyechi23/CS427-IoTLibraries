@@ -27,8 +27,8 @@ const char* ssid     = "UPIoT";
 const char* password = "";
 
 // host - the main URL of the webpage you want to connect to; you can use the IP address of a Flask app
-const char host[] = "http://192.168.68.111:5000";
-const byte flaskappip[4] = {192, 168, 68, 111};
+const char host[] = "http://10.13.135.141:5000";
+const byte flaskappip[4] = {10, 13, 135, 141};
 
 // port - the port of the flask app
 const int port = 5000;
@@ -108,6 +108,11 @@ void loop() {
         // if 5 seconds pass, stop the client due to timeout issue
         if (millis() - timeout > 5000) {
           Serial.println(">>> Client Timeout !");
+          lcd.clear();
+          lcd.setCursor(0, 0);
+          lcd.print("Error Connecting");
+          lcd.setCursor(0, 1);
+          lcd.print("to Server...");
           client.stop();
           return;
         }
