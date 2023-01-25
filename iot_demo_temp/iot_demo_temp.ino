@@ -1,19 +1,29 @@
 /**
- * wifi_client
- * 
- * This was written for the CS427 class at the University of Portland - Internet of Things.
- * The ESP32 has a built-in Wi-Fi module that is vital in creating an IoT device.
- * This project sets up a basis for connecting to a Wi-Fi network using the ESP32 and retrieving
- * data from a common webpage.
+ * iot_demo_temp
+ *
+ * This library is written for the Temperature Sensor demonstration for CS427.
+ * This includes a tutorial on writing a simple Flask app backend, as well as
+ * the code for an ESP32.
  */
 
-// include libraries - WiFi.h
+// include libraries - WiFi.h and DHT
 #include <WiFi.h>
+#include <DHT.h>
+
+// define the DHT sensor
+#define DHT_PIN 14
+#define DHT_TYPE DHT11
+
+// define the LED
+#define LED_PIN 4
+
+// create a DHT object to represent data from the sensor
+DHT dht_sensor(DHT_PIN, DHT_TYPE);
 
 // SSID - the Wi-Fi network's name
 // Password - the Wi-Fi network's password
-const char* ssid     = "poggers";
-const char* password = "UngaBunga69420";
+const char* ssid     = "UPIoT";
+const char* password = "";
 
 // host - the main URL of the webpage you want to connect to; you can use the IP address of a Flask app
 const char host[] = "http://192.168.68.111";
@@ -45,7 +55,11 @@ void setup() {
     Serial.println("IP address: ");
     Serial.println(WiFi.localIP());
 
-    
+    // start the DHT sensory
+    dht_sensor.begin();
+
+    // set the LED pin as an output
+    pinMode(LED_PIN, OUTPUT);
 }
 
 void loop() {
@@ -59,10 +73,18 @@ void loop() {
         // success message
         Serial.println("Connected!");
 
-        // send an HTTPS GET request
-        client.print(String("GET ") + url + " HTTP/1.1\r\n" +
-               "Host: " + host + "\r\n" +
-               "Connection: close\r\n\r\n");
+        // read temperature in Fahrenheit
+        float tempF = dht_sensor.readTemperature(true);
+
+        // check whether the reading is Dsuccessful or not;
+        // if it is, send an HTTP GET request
+        if( !isnan(tempF) ){
+          String urlWithData = "/temp/" + WiFi.macAddress() + "/" + tempF;
+
+          client.print(String("GET ") + urlWithData + " HTTP/1.1\r\n" +
+                "Host: " + host + "\r\n" +
+                "Connection: close\r\n\r\n");
+        }
     }else{
         // failure message
         Serial.println("Failed to connect...");
@@ -80,15 +102,32 @@ void loop() {
     }
 
     // while the client is available, print out the returned data
+    String avgTemp = "";
     while (client.available()) {
         String line = client.readStringUntil('\r');
         Serial.print(line);
+
+        // store the line in avgTemp;
+        // avgTemp should have the last line of the response once the loop ends
+        avgTemp = line;
     }
+
+    // remove the whitespace around the data and convert to a float
+    avgTemp.trim();
+    float temperature = avgTemp.toFloat();
+
+    // if statement to turn on LED
+    if(temperature < 50.0){
+      digitalWrite(LED_PIN, HIGH);
+    }else{
+      digitalWrite(LED_PIN, LOW);
+    }
+
 
     // separating newlines to make it look nicer
     Serial.println();
     Serial.println();
 
     // delay 1 second
-    delay(1000);
+    delay(10000);
 }
